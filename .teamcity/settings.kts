@@ -1,7 +1,4 @@
 import jetbrains.buildServer.configs.kotlin.*
-import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
-import jetbrains.buildServer.configs.kotlin.buildSteps.script
-import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
 
 /*
@@ -31,39 +28,7 @@ version = "2025.07"
 project {
 
     vcsRoot(HttpsGithubComMarimargaryan86playwrightExamplesGit)
-
-    buildType(Build)
 }
-
-object Build : BuildType({
-    name = "Build"
-
-    vcs {
-        root(HttpsGithubComMarimargaryan86playwrightExamplesGit)
-    }
-
-    steps {
-        script {
-            name = "sleep"
-            id = "sleep"
-            scriptContent = "sleep 10"
-        }
-    }
-
-    triggers {
-        vcs {
-            branchFilter = """
-                +:*
-                -:<default>
-            """.trimIndent()
-        }
-    }
-
-    features {
-        perfmon {
-        }
-    }
-})
 
 object HttpsGithubComMarimargaryan86playwrightExamplesGit : GitVcsRoot({
     name = "https://github.com/marimargaryan86/playwright-examples.git"
