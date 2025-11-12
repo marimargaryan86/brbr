@@ -38,10 +38,6 @@ project {
 object Build : BuildType({
     name = "Build"
 
-    vcs {
-        root(HttpsGithubComMarimargaryan86parallelTestsGit)
-    }
-
     steps {
         script {
             name = "sleep"
