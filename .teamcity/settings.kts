@@ -1,4 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
+import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
 
 /*
@@ -28,7 +30,28 @@ version = "2025.07"
 project {
 
     vcsRoot(HttpsGithubComMarimargaryan86playwrightExamplesGit)
+    vcsRoot(HttpsGithubComMarimargaryan86playwrightExamplesGitRefsHeadsMain)
+
+    buildType(Build)
 }
+
+object Build : BuildType({
+    name = "Build"
+
+    vcs {
+        root(HttpsGithubComMarimargaryan86playwrightExamplesGitRefsHeadsMain)
+    }
+
+    triggers {
+        vcs {
+        }
+    }
+
+    features {
+        perfmon {
+        }
+    }
+})
 
 object HttpsGithubComMarimargaryan86playwrightExamplesGit : GitVcsRoot({
     name = "https://github.com/marimargaryan86/playwright-examples.git"
@@ -36,5 +59,16 @@ object HttpsGithubComMarimargaryan86playwrightExamplesGit : GitVcsRoot({
     branch = "refs/heads/main"
     authMethod = password {
         userName = "marimargaryan86"
+    }
+})
+
+object HttpsGithubComMarimargaryan86playwrightExamplesGitRefsHeadsMain : GitVcsRoot({
+    name = "https://github.com/marimargaryan86/playwright-examples.git#refs/heads/main"
+    url = "https://github.com/marimargaryan86/playwright-examples.git"
+    branch = "refs/heads/main"
+    branchSpec = "refs/heads/*"
+    authMethod = password {
+        userName = "marimargaryan86"
+        password = "credentialsJSON:4ec396fe-4be5-4397-9004-3faf0ae7c9dc"
     }
 })
