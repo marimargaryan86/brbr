@@ -2,7 +2,6 @@ import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
-import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -30,8 +29,6 @@ version = "2025.07"
 
 project {
 
-    vcsRoot(HttpsGithubComMarimargaryan86parallelTestsGit)
-
     buildType(Build)
 }
 
@@ -58,14 +55,5 @@ object Build : BuildType({
     features {
         perfmon {
         }
-    }
-})
-
-object HttpsGithubComMarimargaryan86parallelTestsGit : GitVcsRoot({
-    name = "https://github.com/marimargaryan86/parallel-tests.git"
-    url = "https://github.com/marimargaryan86/parallel-tests.git"
-    branch = "refs/heads/main"
-    authMethod = password {
-        userName = "marimargaryan"
     }
 })
